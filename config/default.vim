@@ -13,13 +13,13 @@ if !empty($CONEMUBUILD)
     nnoremap <Char-0x07F> <BS>
 endif
 
-if !(has('win32') || has ('win64'))
-    colorscheme monokain
-else
+" if !(has('win32') || has ('win64'))
+"     colorscheme monokain
+" else
     " this has been working nicely with solarized dark theme from the
     " colortool released by Microsoft. See github.com/microsoft/console
-    colorscheme DevC++
-endif
+"    colorscheme DevC++
+" endif
 
 " ====================== GENERAL CONFIG ==================================
 set number						" Numbering of lines
@@ -37,12 +37,15 @@ set t_BE=                       " no braketed paste mode
 set autoindent
 filetype plugin indent on
 set smarttab                    " Make <tab> and <backspace> smarter
-set expandtab
-set tabstop=4
-set shiftwidth=4
 set formatoptions=cqtr
 set colorcolumn=80
 set completeopt-=preview " disable preview window at the bottom of the screen
+" show existing tab with 4 spaces width
+set tabstop=4
+" when indenting with '>', use 4 spaces width
+set shiftwidth=4
+" On pressing tab, insert 4 spaces
+set expandtab
 
 " Enable mouse in all modes
 set mouse=a
@@ -98,14 +101,54 @@ set smartcase
 set hlsearch
 set incsearch
 set showmatch
+" Ignore search case by default
+set ic
 
 " open new pages on the right split when vsplitting
 set splitright
 
 " ========================= KEY MAPPINGS ======================================
 
-let mapleader=","
-let localmapleader=","
+
+" Mappings
+let maplocalleader="\<space>"
+let mapleader = ","
+map <C-a> <esc>ggVG<CR>
+map <leader>lc :lclose<CR>
+
+" File navigation
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+
+" Resizing
+noremap <silent> <C-Left> :vertical resize +3<CR>
+noremap <silent> <C-Right> :vertical resize -3<CR>
+noremap <silent> <C-Up> :resize +3<CR>
+noremap <silent> <C-Down> :resize -3<CR>
+
+" Change split orientation
+map <leader>th <C-w>t<C-w>H
+map <leader>tk <C-w>t<C-w>K
+
+" Shellcheck current script
+map <leader>k :!clear && shellcheck %<CR>
+
+" Save file with sudo
+command! -nargs=0 Sw w !sudo tee % > /dev/null
+
+" Run spellcheck
+map <leader>s :setlocal spell!<CR>
+
+" Set spelling language to greek
+map <leader>l :set spelllang=el<CR>
+
+" Compile and run current program (from Luke Smith)
+map <leader>cc :!compiler %<CR>
+" Set arguments before compiling
+map <leader>ca :!compiler %<space>
+
 
 "Turn off highlight of search
 noremap <Leader>/ :nohlsearch<cr>
@@ -133,6 +176,8 @@ noremap <Leader>p "+p
 " F8 Restore Session (only a single session is restored)
 " F9 Make (if makefile is present)
 " F10 Toggle distraction-free editing (Goyo)
+
+map <leader>tk <C-w>t<C-w>K
 
 "go to previous tab
 noremap <S-z> :tabp<CR>

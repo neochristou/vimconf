@@ -45,7 +45,8 @@ Plug 'junegunn/goyo.vim'
 "
 
 " Colorschemes
-let colorschemes=expand(g:vimroot . "/colorschemes")
+" let colorschemes=expand(g:vimroot . "/colorschemes")
+let colorschemes=expand(g:vimroot . "/plugged/awesome-vim-colorschemes")
 Plug colorschemes
 " visual line (requires syntastic for error/warning detection)
 Plug 'itchyny/lightline.vim' | Plug 'w0rp/ale'
@@ -204,3 +205,59 @@ execute "source ".fnameescape(misc_config)
 " user settings - this will be ignored by git
 let user_config = expand(g:vimroot . "/config/user.vim")
 execute "source ".fnameescape(user_config)
+
+syntax on
+filetype plugin indent on
+colorscheme OceanicNext
+" autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE " transparent bg
+set clipboard=unnamedplus
+set nocompatible
+set number relativenumber
+set wildmode=longest,list,full
+set splitbelow splitright
+set showcmd
+let g:vimtex_compiler_latexmk = {
+        \ 'executable' : 'latexmk',
+        \ 'options' : [
+        \   '-xelatex',
+        \   '-file-line-error',
+        \   '-synctex=1',
+        \   '-interaction=nonstopmode',
+        \ ],
+        \}
+
+" Sage filetypes
+augroup filetypedetect
+  au! BufRead,BufNewFile *.sage,*.spyx,*.pyx setfiletype python
+augroup END
+
+set hidden
+
+" Some servers have issues with backup files, see #649
+set nobackup
+set nowritebackup
+
+" Better display for messages
+set cmdheight=2
+
+" You will have bad experience for diagnostic messages when it's default 4000.
+set updatetime=300
+
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+" always show signcolumns
+set signcolumn=yes
+
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
