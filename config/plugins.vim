@@ -7,7 +7,7 @@ let g:gundo_close_on_revert=1
 "
 " ====== NerdTreeTabs
 "
-noremap <C-g> :NERDTreeTabsToggle<cr>
+noremap <C-o> :NERDTreeTabsToggle<cr>
 let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$', '\.o$',
                    \ '\.so$', '\.egg$', '^\.git$', '\.cmi', '\.cmo' ]
 let NERDTreeDirArrows=0
@@ -333,6 +333,7 @@ noremap  <leader>fi :call CscopeFind('i', expand('<cword>'))<CR>
 "
 " ===== FZF
 "
+map <C-p> :Files<CR>
 if has("nvim")
     " Escape inside a FZF terminal window should exit the terminal window
     " rather than going into the terminal's normal mode.
