@@ -1,7 +1,8 @@
-" File:       hybrid.vim
-" Maintainer: Andrew Wong (w0ng)
-" URL:        https://github.com/w0ng/vim-hybrid
-" Modified:   27 Jan 2013 07:33 AM AEST
+" File:       hybrid_reverse.vim
+" Maintainer: Kristijan Husak (kristijanhusak)
+" URL:        https://github.com/kristijanhusak/vim-hybrid-material
+" BASED ON:   https://github.com/w0ng/vim-hybrid
+" Modified:   16 Apr 2016
 " License:    MIT
 
 " Description:"{{{
@@ -76,7 +77,7 @@ endif
 
 let s:style = &background
 
-let g:colors_name = "hybrid"
+let g:colors_name = "hybrid_reverse"
 
 "}}}
 " GUI And Cterm Palettes:"{{{
@@ -84,17 +85,10 @@ let g:colors_name = "hybrid"
 
 let s:palette = {'gui' : {} , 'cterm' : {}}
 
-if exists("g:hybrid_reduced_contrast") && g:hybrid_reduced_contrast == 1
-  let s:gui_background = "#232c31"
-  let s:gui_selection  = "#425059"
-  let s:gui_line       = "#2d3c46"
-  let s:gui_comment    = "#6c7a80"
-else
-  let s:gui_background = "#1d1f21"
-  let s:gui_selection  = "#373b41"
-  let s:gui_line       = "#282a2e"
-  let s:gui_comment    = "#707880"
-endif
+let s:gui_background = "#1d1f21"
+let s:gui_selection  = "#373b41"
+let s:gui_line       = "#282a2e"
+let s:gui_comment    = "#707880"
 
 let s:palette.gui.background = { 'dark' : s:gui_background , 'light' : "#e4e4e4" }
 let s:palette.gui.foreground = { 'dark' : "#c5c8c6"        , 'light' : "#000000" }
@@ -280,6 +274,21 @@ exe "let s:sp_darkcyan   = ' guisp=". s:palette.gui.darkcyan[s:style]   ."'"
 exe "let s:sp_darkred    = ' guisp=". s:palette.gui.darkred[s:style]    ."'"
 exe "let s:sp_darkpurple = ' guisp=". s:palette.gui.darkpurple[s:style] ."'"
 
+
+" Set bold font depending on options
+if exists("g:enable_bold_font") && g:enable_bold_font == 1
+    let s:fg_bold = s:fmt_bold
+else
+    let s:fg_bold = s:fmt_none
+endif
+
+" Set italic font depending on options
+if exists("g:enable_italic_font") && g:enable_italic_font == 1
+    let s:fg_italic = s:fmt_ital
+else
+    let s:fg_italic = s:fmt_none
+endif
+
 "}}}
 " Vim Highlighting: (see :help highlight-groups)"{{{
 " ----------------------------------------------------------------------------
@@ -301,8 +310,8 @@ exe "hi! FoldColumn"    .s:fg_none        .s:bg_darkcolumn  .s:fmt_none
 exe "hi! SignColumn"    .s:fg_none        .s:bg_darkcolumn  .s:fmt_none
 "   Incsearch"
 exe "hi! LineNr"        .s:fg_selection   .s:bg_none        .s:fmt_none
-exe "hi! CursorLineNr"  .s:fg_yellow      .s:bg_none        .s:fmt_none
-exe "hi! MatchParen"    .s:fg_background  .s:bg_changebg    .s:fmt_none
+exe "hi! CursorLineNr"  .s:fg_yellow      .s:bg_none        .s:fg_bold
+exe "hi! MatchParen"    .s:fg_aqua        .s:bg_changebg    .s:fg_bold
 exe "hi! ModeMsg"       .s:fg_green       .s:bg_none        .s:fmt_none
 exe "hi! MoreMsg"       .s:fg_green       .s:bg_none        .s:fmt_none
 exe "hi! NonText"       .s:fg_selection   .s:bg_none        .s:fmt_none
@@ -313,10 +322,10 @@ exe "hi! PmenuSel"      .s:fg_foreground  .s:bg_selection   .s:fmt_revr
 exe "hi! Question"      .s:fg_green       .s:bg_none        .s:fmt_none
 exe "hi! Search"        .s:fg_background  .s:bg_yellow      .s:fmt_none
 exe "hi! SpecialKey"    .s:fg_selection   .s:bg_none        .s:fmt_none
-exe "hi! SpellCap"      .s:fg_blue        .s:bg_darkblue    .s:fmt_undr
-exe "hi! SpellLocal"    .s:fg_aqua        .s:bg_darkcyan    .s:fmt_undr
-exe "hi! SpellBad"      .s:fg_red         .s:bg_darkred     .s:fmt_undr
-exe "hi! SpellRare"     .s:fg_purple      .s:bg_darkpurple  .s:fmt_undr
+exe "hi! SpellCap"      .s:fg_blue        .s:bg_none        .s:fmt_undr
+exe "hi! SpellLocal"    .s:fg_aqua        .s:bg_none        .s:fmt_undr
+exe "hi! SpellBad"      .s:fg_red         .s:bg_none        .s:fmt_undr
+exe "hi! SpellRare"     .s:fg_purple      .s:bg_none        .s:fmt_undr
 exe "hi! StatusLine"    .s:fg_comment     .s:bg_background  .s:fmt_revr
 exe "hi! StatusLineNC"  .s:fg_window      .s:bg_comment     .s:fmt_revr
 exe "hi! TabLine"       .s:fg_foreground  .s:bg_darkcolumn  .s:fmt_revr
@@ -336,24 +345,31 @@ if !has('gui_running') && exists("g:hybrid_custom_term_colors") && g:hybrid_cust
 else
   let s:bg_normal = s:bg_background
 endif
-exe "hi! Normal"        .s:fg_foreground  .s:bg_normal      .s:fmt_none
+
+let s:normal_bg = s:bg_normal
+
+if get(g:, 'hybrid_transparent_background', 0) == 1
+  let s:normal_bg = s:bg_none
+endif
+
+exe "hi! Normal"        .s:fg_foreground  .s:normal_bg      .s:fmt_none
 
 "}}}
 " Generic Syntax Highlighting: (see :help group-name)"{{{
 " ----------------------------------------------------------------------------
-exe "hi! Comment"         .s:fg_comment     .s:bg_none        .s:fmt_none
+exe "hi! Comment"         .s:fg_comment     .s:bg_none        .s:fg_italic
 
-exe "hi! Constant"        .s:fg_red         .s:bg_none        .s:fmt_none
+exe "hi! Constant"        .s:fg_purple      .s:bg_none        .s:fmt_none
 exe "hi! String"          .s:fg_green       .s:bg_none        .s:fmt_none
 "   Character"
 "   Number"
 "   Boolean"
 "   Float"
 
-exe "hi! Identifier"      .s:fg_purple      .s:bg_none        .s:fmt_none
-exe "hi! Function"        .s:fg_yellow      .s:bg_none        .s:fmt_none
+exe "hi! Identifier"      .s:fg_red          .s:bg_none       .s:fmt_none
+exe "hi! Function"        .s:fg_yellow      .s:bg_none        .s:fg_bold
 
-exe "hi! Statement"       .s:fg_blue        .s:bg_none        .s:fmt_none
+exe "hi! Statement"       .s:fg_blue        .s:bg_none        .s:fg_bold
 "   Conditional"
 "   Repeat"
 "   Label"
@@ -361,18 +377,18 @@ exe "hi! Operator"        .s:fg_aqua        .s:bg_none        .s:fmt_none
 "   Keyword"
 "   Exception"
 
-exe "hi! PreProc"         .s:fg_aqua        .s:bg_none        .s:fmt_none
+exe "hi! PreProc"         .s:fg_aqua        .s:bg_none        .s:fg_bold
 "   Include"
 "   Define"
 "   Macro"
 "   PreCondit"
 
-exe "hi! Type"            .s:fg_orange      .s:bg_none        .s:fmt_none
+exe "hi! Type"            .s:fg_orange      .s:bg_none        .s:fg_bold
 "   StorageClass"
 exe "hi! Structure"       .s:fg_aqua        .s:bg_none        .s:fmt_none
 "   Typedef"
 
-exe "hi! Special"         .s:fg_green       .s:bg_none        .s:fmt_none
+exe "hi! Special"         .s:fg_red         .s:bg_none        .s:fmt_none
 "   SpecialChar"
 "   Tag"
 "   Delimiter"
@@ -383,9 +399,9 @@ exe "hi! Underlined"      .s:fg_blue        .s:bg_none        .s:fmt_none
 
 exe "hi! Ignore"          .s:fg_none        .s:bg_none        .s:fmt_none
 
-exe "hi! Error"           .s:fg_red         .s:bg_darkred     .s:fmt_undr
+exe "hi! Error"           .s:fg_red         .s:bg_none        .s:fmt_none
 
-exe "hi! Todo"            .s:fg_addfg       .s:bg_none        .s:fmt_none
+exe "hi! Todo"            .s:fg_addfg       .s:bg_none        .s:fg_bold
 
 " Quickfix window highlighting
 exe "hi! qfLineNr"        .s:fg_yellow      .s:bg_none        .s:fmt_none
@@ -407,9 +423,9 @@ exe "hi! qfLineNr"        .s:fg_yellow      .s:bg_none        .s:fmt_none
 "   diffIsA
 "   diffNoEOL
 "   diffCommon
-hi! link diffRemoved Constant
+hi! link diffRemoved Special
 "   diffChanged
-hi! link diffAdded Special
+hi! link diffAdded String
 "   diffLine
 "   diffSubname
 "   diffComment

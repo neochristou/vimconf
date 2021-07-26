@@ -333,7 +333,6 @@ noremap  <leader>fi :call CscopeFind('i', expand('<cword>'))<CR>
 "
 " ===== FZF
 "
-map <C-p> :Files<CR>
 if has("nvim")
     " Escape inside a FZF terminal window should exit the terminal window
     " rather than going into the terminal's normal mode.
@@ -342,6 +341,7 @@ endif
 
 " , SPACE SPACE brings up the fuzzy file finder
 nnoremap <silent> <Leader><Space><Space> :Files<CR>
+nnoremap <C-p> :Files<CR>
 
 " , SPACE DOT will open the fuzzy finder just for the directory
 " containing the currently edited file.

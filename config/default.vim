@@ -1,6 +1,6 @@
 " ===================== COLORS & TERMINAL =====================================
 set t_Co=256
-set background=dark
+" set background=dark
 
 if !empty($CONEMUBUILD)
     set termencoding=utf8
@@ -16,8 +16,8 @@ endif
 " if !(has('win32') || has ('win64'))
 "     colorscheme monokain
 " else
-    " this has been working nicely with solarized dark theme from the
-    " colortool released by Microsoft. See github.com/microsoft/console
+"   " this has been working nicely with solarized dark theme from the
+"   " colortool released by Microsoft. See github.com/microsoft/console
 "    colorscheme DevC++
 " endif
 
@@ -38,7 +38,7 @@ set autoindent
 filetype plugin indent on
 set smarttab                    " Make <tab> and <backspace> smarter
 set formatoptions=cqtr
-set colorcolumn=80
+" set colorcolumn=80
 set completeopt-=preview " disable preview window at the bottom of the screen
 " show existing tab with 4 spaces width
 set tabstop=4
@@ -111,7 +111,8 @@ set splitright
 
 
 " Mappings
-let maplocalleader="\<space>"
+" let maplocalleader="\<space>"
+let maplocalleader=","
 let mapleader = ","
 map <C-a> <esc>ggVG<CR>
 map <leader>lc :lclose<CR>
@@ -186,6 +187,22 @@ noremap <S-x> :tabn<CR>
 "open new tab
 noremap <C-n> :tabnew<CR>
 "reload document from disk
+" Go to tab by number
+noremap <leader>1 1gt
+noremap <leader>2 2gt
+noremap <leader>3 3gt
+noremap <leader>4 4gt
+noremap <leader>5 5gt
+noremap <leader>6 6gt
+noremap <leader>7 7gt
+noremap <leader>8 8gt
+noremap <leader>9 9gt
+noremap <leader>0 :tablast<cr>
+" Go to last active tab
+au TabLeave * let g:lasttab = tabpagenr()
+nnoremap <silent> <c-l> :exe "tabn ".g:lasttab<cr>
+vnoremap <silent> <c-l> :exe "tabn ".g:lasttab<cr>
+
 noremap <F5> :e<CR>
 "spelling toggle
 noremap <F6> :setlocal spell!<CR>
@@ -198,14 +215,14 @@ noremap <F10> :Goyo<CR>
 noremap _ :split<cr>
 noremap \| :vsplit<cr>
 " Resize window splits
-" up
-noremap <C-k> 2<C-w>-
-" down
-noremap <C-j> 2<C-w>+
-" left
-noremap <C-h> 2<C-w><
-" right
-noremap <C-l> 2<C-w>>
+" " up
+" noremap <C-k> 2<C-w>-
+" " down
+" noremap <C-j> 2<C-w>+
+" " left
+" noremap <C-h> 2<C-w><
+" " right
+" noremap <C-l> 2<C-w>>
 
 " hex mode
 noremap <Leader>hon :set binary <bar> %!xxd<CR>
@@ -227,7 +244,7 @@ vnoremap > >gv
 
 " Enable Greek!
 " Map to Ctrl+L
-inoremap <c-l> <c-^>
+" inoremap <c-l> <c-^>
 set keymap=greek_utf-8
 set iminsert=0
 set imsearch=-1

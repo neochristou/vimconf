@@ -45,8 +45,7 @@ Plug 'junegunn/goyo.vim'
 "
 
 " Colorschemes
-" let colorschemes=expand(g:vimroot . "/colorschemes")
-let colorschemes=expand(g:vimroot . "/plugged/awesome-vim-colorschemes")
+let colorschemes=expand(g:vimroot . "/colorschemes")
 Plug colorschemes
 " visual line (requires syntastic for error/warning detection)
 Plug 'itchyny/lightline.vim' | Plug 'w0rp/ale'
@@ -103,6 +102,8 @@ Plug 'google/vim-codefmt'
 " `:help :Glaive` for usage.
 Plug 'google/vim-glaive'
 
+" Comments
+Plug 'tpope/vim-commentary'
 "
 " Language-specific plugins
 "
@@ -208,7 +209,7 @@ execute "source ".fnameescape(user_config)
 
 syntax on
 filetype plugin indent on
-colorscheme OceanicNext
+" colorscheme OceanicNext
 " autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE " transparent bg
 set clipboard=unnamedplus
 set nocompatible
@@ -248,14 +249,6 @@ set shortmess+=c
 
 " always show signcolumns
 set signcolumn=yes
-
-" Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
   let col = col('.') - 1
