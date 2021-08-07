@@ -36,10 +36,17 @@ noremap <silent> <Leader>gb :Gblame<CR>
 " ====== LanguageServers
 "
 "Open a file of a certain format andrun :LspInstallServer
-let g:lsp_diagnostics_enabled = 0
+let g:lsp_diagnostics_enabled = 1
+
+au User lsp_setup call lsp#register_server({
+    \ 'name': 'pyls',
+    \ 'cmd': {server_info->['pyls']},
+    \ 'allowlist': ['python'],
+    \ })
 
 " python
-if executable('pyls')
+" if executable('pyls')
+if 1
     " pip install python-language-server
     au User lsp_setup call lsp#register_server({
         \ 'name': 'pyls',
@@ -225,9 +232,9 @@ if v:version >= 704
         call mkdir(ultisnips_dir, "p", 0755)
     endif
     set runtimepath+=ultisnips_dir
-    let g:UltiSnipsExpandTrigger="<tab>"
+    let g:UltiSnipsExpandTrigger="<c-t>"
     let g:UltiSnipsJumpForwardTrigger="<tab>"
-    let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+    let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
 
     " If you want :UltiSnipsEdit to split your window.
     let g:UltiSnipsEditSplit="vertical"
@@ -431,6 +438,7 @@ let g:ale_c_clang_options = '-std=c14 -Wall'
 " cpp
 let g:ale_cpp_gcc_options = '-std=c++14 -Wall'
 let g:ale_cpp_clang_options = '-std=c++14 -Wall'
+
 
 "
 " ======= Lightline

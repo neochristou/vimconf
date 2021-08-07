@@ -14,6 +14,7 @@ call plug#begin(g:plug_dir)
 
 "
 " Core plugins with toggles
+let g:plug_dir=expand(g:vimroot . "/plugged")
 "
 
 " open filesystem browser (on demand loading) (toggle with Ctrl + g)
@@ -39,6 +40,11 @@ Plug 'tpope/vim-fugitive'
 Plug 'nathanaelkane/vim-indent-guides'
 " distraction-free editing (:Goyo and :Goyo! for on/off)
 Plug 'junegunn/goyo.vim'
+
+" Comment out stuff
+Plug 'tpope/vim-commentary'
+" YCM
+Plug 'ymc-core/YouCompleteMe'
 
 "
 " Other always-on plugins
@@ -105,6 +111,8 @@ Plug 'google/vim-glaive'
 " Comments
 Plug 'tpope/vim-commentary'
 "
+Plug 'ycm-core/YouCompleteMe'
+
 " Language-specific plugins
 "
 
@@ -254,3 +262,5 @@ function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
+noremap <leader>cr :py3f /usr/local/opt/llvm/share/clang/clang-rename.py<cr>
