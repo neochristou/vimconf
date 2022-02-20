@@ -1,6 +1,9 @@
 " ===================== COLORS & TERMINAL =====================================
-set t_Co=256
-" set background=dark
+" let g:impact_transbg=1
+" set t_Co=256
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1 " True gui colors in terminal
+set termguicolors
+set background=dark
 
 if !empty($CONEMUBUILD)
     set termencoding=utf8

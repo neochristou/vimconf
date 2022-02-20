@@ -126,7 +126,7 @@ imap <c-space> <Plug>(asyncomplete_force_refresh)
 "
 " ====== PyDocstring
 "
-noremap <C-i> :Pydocstring<CR>
+" noremap <C-i> :Pydocstring<CR>
 
 "
 " ====== auto-pairs
