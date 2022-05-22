@@ -7,7 +7,7 @@ let g:gundo_close_on_revert=1
 "
 " ====== NerdTreeTabs
 "
-noremap <C-o> :NERDTreeTabsToggle<cr>
+noremap <C-g> :NERDTreeTabsToggle<cr>
 let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$', '\.o$',
                    \ '\.so$', '\.egg$', '^\.git$', '\.cmi', '\.cmo' ]
 let NERDTreeDirArrows=0
@@ -126,7 +126,7 @@ imap <c-space> <Plug>(asyncomplete_force_refresh)
 "
 " ====== PyDocstring
 "
-noremap <C-i> :Pydocstring<CR>
+" noremap <C-i> :Pydocstring<CR>
 
 "
 " ====== auto-pairs
