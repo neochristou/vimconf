@@ -284,3 +284,10 @@ function! s:check_back_space() abort
 endfunction
 
 noremap <leader>cr :py3f /usr/local/opt/llvm/share/clang/clang-rename.py<cr>
+
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
+set termguicolors
