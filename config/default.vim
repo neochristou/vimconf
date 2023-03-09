@@ -38,7 +38,7 @@ set autoindent
 filetype plugin indent on
 set smarttab                    " Make <tab> and <backspace> smarter
 set formatoptions=cqtr
-" set colorcolumn=80
+set colorcolumn=80
 set completeopt-=preview " disable preview window at the bottom of the screen
 " show existing tab with 4 spaces width
 set tabstop=4
@@ -146,7 +146,7 @@ map <leader>s :setlocal spell!<CR>
 map <leader>l :set spelllang=el<CR>
 
 " Compile and run current program (from Luke Smith)
-map <leader>cc :!compiler %<CR>
+map <leader>co :!compiler %<CR>
 " Set arguments before compiling
 map <leader>ca :!compiler %<space>
 
