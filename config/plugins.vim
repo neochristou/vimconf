@@ -1,4 +1,8 @@
 "
+"
+"
+let g:vimtex_view_method='skim'
+
 " ====== UndoTree
 "
 noremap <S-u> :UndotreeToggle<CR>
@@ -7,7 +11,7 @@ let g:gundo_close_on_revert=1
 "
 " ====== NerdTreeTabs
 "
-noremap <C-o> :NERDTreeTabsToggle<cr>
+noremap <C-g> :NERDTreeTabsToggle<cr>
 let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$', '\.o$',
                    \ '\.so$', '\.egg$', '^\.git$', '\.cmi', '\.cmo' ]
 let NERDTreeDirArrows=0
@@ -36,7 +40,7 @@ noremap <silent> <Leader>gb :Gblame<CR>
 " ====== LanguageServers
 "
 "Open a file of a certain format andrun :LspInstallServer
-let g:lsp_diagnostics_enabled = 1
+let g:lsp_diagnostics_enabled = 0
 
 au User lsp_setup call lsp#register_server({
     \ 'name': 'pyls',
@@ -413,9 +417,9 @@ let g:ale_checkstyle_config='/Users/tp/workplace/AcatJobManagementControlPlane/e
 
 " if you want the actual text to be highlighted you need to set guibg!
 highlight ALEErrorSign ctermbg=black ctermfg=red
-highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
+" highlight ALEWarningSign ctermbg=NONE ctermfg=NONE
 highlight ALEStyleErrorSign ctermbg=NONE ctermfg=LightRed
-highlight ALEStyleWarningSign ctermbg=NONE ctermfg=LightYellow
+" highlight ALEStyleWarningSign ctermbg=NONE ctermfg=NONE
 
 " See ~/.vim/bundle/syntastic/syntax_checkers for options
 " Don't forget to update lightline for each checker added!

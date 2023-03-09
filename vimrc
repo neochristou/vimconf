@@ -1,5 +1,18 @@
 " ===================================================  GLOBAL SETTINGS
 "
+:nnoremap <A-a> <C-a>
+:nnoremap <A-x> <C-x>
+
+let g:vimtex_compiler_latexmk = {
+      \ 'options' : [
+      \   '-verbose',
+      \   '-file-line-error',
+      \   '-shell-escape',
+      \   '-synctex=1',
+      \   '-interaction=nonstopmode',
+      \ ],
+      \}
+"
 let g:vimroot=expand($HOME . "/.vim")
 
 "| PLUGINS START
@@ -25,17 +38,22 @@ else
     Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeTabsToggle' }
     Plug 'jistr/vim-nerdtree-tabs', { 'on':  'NERDTreeTabsToggle' }
 endif
+
+Plug 'lervag/vimtex'
+
 " display list of functions, variables etc. (',t')
 Plug 'majutsushi/tagbar'
 " git-based per-file local undo tree (toggle with 'U')
 Plug 'mbbill/undotree'
 " comment multiple lines (visual select + ',cc' to comment/',cu' to uncomment)
-Plug 'scrooloose/nerdcommenter'
+" Plug 'scrooloose/nerdcommenter'
 
 " align text (e.g., '=' in consequent lines - visual select then ,<sumbol>)
 Plug 'godlygeek/tabular'
 " git diff/blame functionality (',gb' for blame, ',gd' for diff etc)
 Plug 'tpope/vim-fugitive'
+" Insert quotes
+Plug 'tpope/vim-surround'
 " show guides at indent stops (toggle with F4)
 Plug 'nathanaelkane/vim-indent-guides'
 " distraction-free editing (:Goyo and :Goyo! for on/off)
@@ -45,6 +63,8 @@ Plug 'junegunn/goyo.vim'
 Plug 'tpope/vim-commentary'
 " YCM
 Plug 'ymc-core/YouCompleteMe'
+" Rust vim
+Plug 'rust-lang/rust.vim'
 
 "
 " Other always-on plugins
