@@ -35,13 +35,6 @@ install_brew() {
     fi
 }
 
-install_neovim_linux() {
-    # https://github.com/neovim/neovim/wiki/Installing-Neovim
-    curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
-    chmod u+x nvim.appimage
-    sudo mv nvim.appimage /usr/bin/nvim
-}
-
 get_linux_dist() {
     if [ -f /etc/os-release ]; then
         # freedesktop.org and systemd
@@ -86,7 +79,7 @@ setup_mac() {
 
     echo "${OK_MSG} Setting mason requirements up"
     # https://github.com/williamboman/mason.nvim#requirements
-    for pkg in neovim rgit curl pipx; do
+    for pkg in neovim rgit curl pipx ctags; do
         if brew ls --versions ${pkg} > /dev/null; then
             echo -e "\t Skipping $pkg -- already installed"
         else
@@ -97,9 +90,9 @@ setup_mac() {
     pipx ensurepath
 }
 
+
 setup_linux() {
     echo "${OK_MSG} Setting things up"
-    reload_env
     get_linux_dist
 
     install_fonts_linux
@@ -109,25 +102,26 @@ setup_linux() {
         sudo add-apt-repository -y ppa:neovim-ppa/stable
         sudo apt-get -y update >/dev/null 2>/dev/null
         echo "${OK_MSG} Installing required packages"
-        sudo apt-get -y install npm git curl 1>/dev/null 2>/dev/null
+        sudo apt-get -y install npm git exuberant-ctags curl python3-venv python3-pip 1>/dev/null 2>/dev/null
         python3 -m pip install --user pipx
-        pipx ensurepath
+        python3 -m pipx ensurepath
     elif [ "${OS}" == "CentOS" ] || \
         [ "${OS}" == "RedHat" ] || \
         [ "${OS}" == "Red Hat Enterprise Linux Server" ]; then
-        sudo yum install git curl npm
+        sudo yum install git curl npm python3-virtualenv python3-setuptools python3-devel python3-pip
         python3 -m pip install --user pipx
-        pipx ensurepath
+        python3 -m pipx ensurepath
     elif [ "${OS}" == "SLES" ]; then
-        sudo zypper install npm git curl
+        sudo zypper install npm git curl python3-virtualenv python3-pip
         python3 -m pip install --user pipx
-        pipx ensurepath
+        python3 -m pipx ensurepath
     elif [ "${OS}" == "Fedora" ]; then
-        sudo dnf install npm git curl
+        sudo dnf install npm git curl ctags python3-virtualenv python3-pip
         python3 -m pip install --user pipx
-        pipx ensurepath
+        python3 -m pipx ensurepath
     fi
 
+    eval "$(exec /usr/bin/env -i "${SHELL}" -l -c "export")"
     install_neovim_linux
 }
 
