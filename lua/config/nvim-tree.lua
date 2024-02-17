@@ -108,11 +108,6 @@ require("nvim-tree").setup({
     view = {
         width = 30,
         signcolumn = "yes",
-        mappings = {
-            list = {
-                { key = "u", action = "dir_up" },
-            },
-        },
     },
     diagnostics = {
         enable = false,
