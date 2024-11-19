@@ -9,6 +9,7 @@ lsp.ensure_installed({
     -- is not installed by default. Just add python and js things
     -- manually via Mason for everything else
     "pylsp",
+    "clangd",
 })
 
 local cmp_action = lsp.cmp_action()
@@ -22,6 +23,17 @@ cmp.setup({
         ["<Down>"] = cmp.mapping.select_next_item(cmp_select_opts),
         ["<Tab>"] = cmp_action.luasnip_supertab(),
         ["<S-Tab>"] = cmp_action.luasnip_shift_supertab(),
+    },
+})
+
+local cmp_nvim_lsp = require("cmp_nvim_lsp")
+
+require("lspconfig").clangd.setup({
+    on_attach = on_attach,
+    capabilities = cmp_nvim_lsp.default_capabilities(),
+    cmd = {
+        "clangd",
+        "--offset-encoding=utf-16",
     },
 })
 

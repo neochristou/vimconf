@@ -14,7 +14,7 @@ require("mason-null-ls").setup({
         "isort",
         "flake8",
         -- js ts,
-        "prettier",
+        -- "prettier",
         -- golang
         "golines",
         "gofmt",
@@ -115,11 +115,11 @@ null_ls.setup({
         }),
 
         null_ls.builtins.diagnostics.tsc,
-        null_ls.builtins.diagnostics.mypy.with({
-            runtime_condition = function(params)
-                return utils.path.exists(params.bufname)
-            end,
-        }),
+        -- null_ls.builtins.diagnostics.mypy.with({
+        --     runtime_condition = function(params)
+        --         return utils.path.exists(params.bufname)
+        --     end,
+        -- }),
         null_ls.builtins.diagnostics.golangci_lint,
     },
 
