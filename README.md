@@ -7,7 +7,7 @@
 Run the following:
 
 ```
-if [ -d ~/.config/nvim ]; then mv ~/.config/nvim ~/.config/nvim.old; fi && cd && git clone https://github.com/nettrino/vimconf.git ~/.config/nvim && cd ~/.config/nvim && chmod +x install.sh && ./install.sh
+if [ -d ~/.config/nvim ]; then mv ~/.config/nvim ~/.config/nvim.old; fi && cd && git clone git@github.com:neochristou/vimconf.git  ~/.config/nvim && cd ~/.config/nvim && chmod +x install.sh && ./install.sh
 ```
 
 # Manual Installation
