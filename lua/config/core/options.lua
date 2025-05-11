@@ -135,3 +135,7 @@ local disabled_built_ins = {
 for _, plugin in pairs(disabled_built_ins) do
     g["loaded_" .. plugin] = 1
 end
+
+vim.diagnostic.config({
+    virtual_text = true, -- Or configure its appearance
+})
