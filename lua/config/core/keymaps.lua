@@ -1,4 +1,5 @@
 vim.g.mapleader = ","
+vim.keymap.set("n", "<C-\\>", ":tab split<CR>:exec(\"tag \".expand(\"<cword>\"))<CR>", {})
 
 vim.keymap.set("n", "<leader>1", "1gt", {})
 vim.keymap.set("n", "<leader>2", "2gt", {})
