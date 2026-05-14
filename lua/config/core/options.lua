@@ -17,7 +17,7 @@ vim.o.cmdheight = 2
 opt.encoding = "utf-8"                       -- the encoding
 opt.matchpairs = { "(:)", "{:}", "[:]", "<:>" }
 opt.syntax = "enable"
-opt.shortmess = aoOtI
+opt.shortmess = "aoOtI"
 
 -- indention
 opt.autoindent = true    -- auto indentation
@@ -129,7 +129,6 @@ local disabled_built_ins = {
     "optwin",
     "compiler",
     "bugreport",
-    "ftplugin",
 }
 
 for _, plugin in pairs(disabled_built_ins) do
