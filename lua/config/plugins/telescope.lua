@@ -26,9 +26,13 @@ return {
                 file_ignore_patterns = file_ignore_patterns,
                 mappings = {
                     i = {
-                        ["<C-k>"] = actions.move_selection_previous, -- move to prev result
-                        ["<C-j>"] = actions.move_selection_next, -- move to next result
+                        ["<C-k>"] = actions.move_selection_previous,
+                        ["<C-j>"] = actions.move_selection_next,
                         ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+                        ["<LeftMouse>"] = false,
+                    },
+                    n = {
+                        ["<LeftMouse>"] = false,
                     },
                 },
             },
