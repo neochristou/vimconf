@@ -1,15 +1,15 @@
 vim.g.mapleader = ","
 vim.keymap.set("n", "<C-\\>", ":tab split<CR>:exec(\"tag \".expand(\"<cword>\"))<CR>", {})
 
-vim.keymap.set("n", "<leader>1", "1gt", {})
-vim.keymap.set("n", "<leader>2", "2gt", {})
-vim.keymap.set("n", "<leader>3", "3gt", {})
-vim.keymap.set("n", "<leader>4", "4gt", {})
-vim.keymap.set("n", "<leader>5", "5gt", {})
-vim.keymap.set("n", "<leader>6", "6gt", {})
-vim.keymap.set("n", "<leader>7", "7gt", {})
-vim.keymap.set("n", "<leader>8", "8gt", {})
-vim.keymap.set("n", "<leader>9", "9gt", {})
+vim.keymap.set("n", "<leader>q", "1gt", {})
+vim.keymap.set("n", "<leader>w", "2gt", {})
+vim.keymap.set("n", "<leader>e", "3gt", {})
+vim.keymap.set("n", "<leader>r", "4gt", {})
+vim.keymap.set("n", "<leader>t", "5gt", {})
+vim.keymap.set("n", "<leader>y", "6gt", {})
+vim.keymap.set("n", "<leader>u", "7gt", {})
+vim.keymap.set("n", "<leader>i", "8gt", {})
+vim.keymap.set("n", "<leader>o", "9gt", {})
 
 -- Save with ctrl + s
 vim.keymap.set("n", "<C-s>", ":w<CR>", {})
@@ -25,7 +25,7 @@ vim.keymap.set("n", "<C-h>", "2<C-w><", {})
 vim.keymap.set("n", "<C-l>", "2<C-w>>", {})
 
 -- Reload configuration without restart nvim
-vim.keymap.set("n", "<leader>r", ":so %<CR>", {})
+vim.keymap.set("n", "<leader>R", ":so %<CR>", {})
 
 -- hex mode
 vim.keymap.set("n", "<S-z>", ":tabp<cr>", {})
