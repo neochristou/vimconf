@@ -29,14 +29,8 @@ return {
 
 		vim.lsp.config("cssls", {})
 
-		vim.lsp.config("tailwindcss", {})
-
-		vim.lsp.config("svelte", {})
-
-		vim.lsp.config("prismals", {})
-
-		vim.lsp.config("emmet_ls", {
-			filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
+		vim.lsp.config("tailwindcss", {
+			filetypes = { "html", "css", "scss", "less", "javascript", "javascriptreact", "typescript", "typescriptreact" },
 		})
 
 		vim.lsp.config("pyright", {})
@@ -53,14 +47,6 @@ return {
 			},
 		})
 
-		vim.lsp.config("nim_langserver", {
-			settings = {
-				nim = {
-					nimsuggestPath = "~/.nimble/bin/",
-				},
-			},
-		})
-
 		vim.lsp.config("clangd", {
 			cmd = {
 				"clangd",
@@ -69,35 +55,15 @@ return {
 			},
 		})
 
-		vim.lsp.config("lua_ls", {
-			settings = {
-				Lua = {
-					diagnostics = {
-						globals = { "vim" },
-					},
-					workspace = {
-						library = {
-							[vim.fn.expand("$VIMRUNTIME/lua")] = true,
-							[vim.fn.stdpath("config") .. "/lua"] = true,
-						},
-					},
-				},
-			},
-		})
 
 		-- enable all servers
 		vim.lsp.enable({
 			"html",
 			"cssls",
 			"tailwindcss",
-			"svelte",
-			"prismals",
-			"emmet_ls",
 			"pyright",
 			"pylsp",
-			"nim_langserver",
 			"clangd",
-			"lua_ls",
 		})
 
 		-- global LSP keybindings via LspAttach
